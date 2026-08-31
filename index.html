@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#16a34a">
+
+    <meta name="description"
+          content="Personal daily nutrition tracker">
+
+    <title>NutriTrack</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="top-header">
+
+    <div>
+        <h1>NutriTrack</h1>
+        <p>My Personal Nutrition Tracker</p>
+    </div>
+
+    <button id="installBtn"
+            class="install-btn"
+            style="display:none;">
+        Install
+    </button>
+
+</header>
+
+
+<main class="container">
+    <!-- =========================
+     PROFILE SECTION
+========================= -->
+<section class="profile-card">
+
+    <div class="profile-photo-container">
+        <img
+            id="profilePhoto"
+            src=""
+            alt="Profile Photo"
+            class="profile-photo"
+        />
+
+        <div id="defaultProfileIcon" class="default-profile-icon">
+            👤
+        </div>
+    </div>
+
+    <div class="profile-info">
+        <h2 id="profileName">Your Name</h2>
+
+        <button
+            type="button"
+            id="changePhotoBtn"
+            class="change-photo-btn"
+        >
+            📷 Change Photo
+        </button>
+
+        <input
+            type="file"
+            id="profilePhotoInput"
+            accept="image/*"
+            hidden
+        />
+    </div>
+
+</section>
+
+    <!-- DATE -->
+
+    <section class="date-bar">
+
+        <button id="prevDay">‹</button>
+
+        <div>
+            <small>Selected Date</small>
+            <input type="date" id="dateInput">
+        </div>
+
+        <button id="nextDay">›</button>
+
+    </section>
+
+
+    <!-- DAILY TOTAL -->
+
+    <section class="card">
+
+        <div class="section-title">
+            <h2>Daily Total</h2>
+        </div>
+
+        <div class="nutrition-grid">
+
+            <div class="nutrition-box calories">
+                <span>🔥</span>
+                <small>Calories</small>
+                <strong id="totalCalories">0</strong>
+                <em>kcal</em>
+            </div>
+
+            <div class="nutrition-box protein">
+                <span>🥩</span>
+                <small>Protein</small>
+                <strong id="totalProtein">0</strong>
+                <em>g</em>
+            </div>
+
+            <div class="nutrition-box carbs">
+                <span>🍚</span>
+                <small>Carbs</small>
+                <strong id="totalCarbs">0</strong>
+                <em>g</em>
+            </div>
+
+            <div class="nutrition-box fat">
+                <span>🥑</span>
+                <small>Fat</small>
+                <strong id="totalFat">0</strong>
+                <em>g</em>
+            </div>
+
+            <div class="nutrition-box fiber">
+                <span>🌾</span>
+                <small>Fiber</small>
+                <strong id="totalFiber">0</strong>
+                <em>g</em>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADD FOOD -->
+
+    <section class="card">
+
+        <h2>Add Food</h2>
+
+        <!-- MEAL -->
+
+        <label for="meal">Meal</label>
+
+        <select id="meal">
+
+            <option value="Breakfast">
+                Breakfast
+            </option>
+
+            <option value="Lunch">
+                Lunch
+            </option>
+
+            <option value="Evening">
+                Evening Snack
+            </option>
+
+            <option value="Dinner">
+                Dinner
+            </option>
+
+        </select>
+
+
+        <!-- FOOD SEARCH -->
+
+        <label for="foodSearch">Food</label>
+
+        <input
+            type="text"
+            id="foodSearch"
+            placeholder="Search food..."
+            autocomplete="off"
+        >
+
+        <div id="suggestions"
+             class="suggestions">
+        </div>
+
+
+        <!-- SELECTED FOOD -->
+
+        <div id="foodPanel"
+             class="food-panel hidden">
+
+            <div class="food-heading">
+
+                <div>
+                    <h3 id="selectedFoodName">
+                        Food
+                    </h3>
+
+                    <small id="nutritionBasis">
+                        Nutrition basis
+                    </small>
+                </div>
+
+                <button id="clearFood"
+                        class="small-btn">
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- QUANTITY -->
+
+            <div class="quantity-row">
+
+                <div>
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        min="0.1"
+                        step="0.1"
+                        value="100"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="unit">
+                        Unit
+                    </label>
+
+                    <select id="unit">
+
+                        <option value="g">
+                            Grams (g)
+                        </option>
+
+                        <option value="oz">
+                            Ounces (oz)
+                        </option>
+
+                        <option value="ml">
+                            Millilitres (ml)
+                        </option>
+
+                        <option value="piece">
+                            Pieces
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- CALCULATED -->
+
+            <div class="calculated-box">
+
+                <h3>Your Quantity</h3>
+
+                <div class="calculated-grid">
+
+                    <div>
+                        <span>Calories</span>
+                        <b id="calcCalories">0</b>
+                        <small>kcal</small>
+                    </div>
+
+                    <div>
+                        <span>Protein</span>
+                        <b id="calcProtein">0</b>
+                        <small>g</small>
+                    </div>
+
+                    <div>
+                        <span>Carbs</span>
+                        <b id="calcCarbs">0</b>
+                        <small>g</small>
+                    </div>
+
+                    <div>
+                        <span>Fat</span>
+                        <b id="calcFat">0</b>
+                        <small>g</small>
+                    </div>
+
+                    <div>
+                        <span>Fiber</span>
+                        <b id="calcFiber">0</b>
+                        <small>g</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button id="addFoodBtn"
+                    class="primary-btn">
+                + Add Food
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- TODAY'S FOOD -->
+
+    <section class="card">
+
+        <div class="section-title">
+
+            <h2>Today's Food</h2>
+
+            <span id="foodCount">
+                0 foods
+            </span>
+
+        </div>
+
+
+        <div id="mealSections"></div>
+
+
+        <div id="emptyFood"
+             class="empty">
+            No food added yet.
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section class="card">
+
+        <div class="section-title">
+
+            <h2>History</h2>
+
+            <button id="clearHistory"
+                    class="danger-text">
+                Clear All
+            </button>
+
+        </div>
+
+        <div id="historyList"></div>
+
+    </section>
+
+
+    <!-- BACKUP -->
+
+    <section class="card backup-card">
+
+        <h2>Backup & Restore</h2>
+
+        <p>
+            Save your nutrition history as a backup
+            file or restore it later.
+        </p>
+
+
+        <div class="backup-buttons">
+
+            <button id="backupBtn"
+                    class="secondary-btn">
+                ⬇ Backup Data
+            </button>
+
+            <button id="restoreBtn"
+                    class="secondary-btn">
+                ⬆ Restore Data
+            </button>
+
+        </div>
+
+
+        <input
+            type="file"
+            id="restoreFile"
+            accept=".json,application/json"
+            hidden
+        >
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>NutriTrack • Personal Nutrition Tracker</p>
+</footer>
+
+
+<script src="js/foods.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
