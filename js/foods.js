@@ -1360,6 +1360,21 @@ const foods = [
     gramsPerPiece: 40,
     mlEquivalent: null
 },
+    {
+    name: "Chappathi",
+
+    basis: "1 piece",
+
+    calories: 120,
+    protein: 3.5,
+    carbs: 18.0,
+    fat: 3.5,
+    fiber: 2.5,
+
+    gramsPerPiece: 40,
+    mlEquivalent: null
+
+},
 
 {
     name: "Dosa",
